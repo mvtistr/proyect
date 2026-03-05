@@ -12,7 +12,8 @@
       "@img/*": ["./src/assets/img/*"],
       "@shared/*": ["./src/shared/*"],
       "@data/*": ["./src/data/*"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@context/*": ["./src/context/*"]
     }
   }
 }

@@ -17,7 +17,8 @@ export default defineConfig({
       '@img': fileURLToPath(new URL('./src/assets/img', import.meta.url)),
       '@shared': fileURLToPath(new URL('./src/shared', import.meta.url)),
       '@data': fileURLToPath(new URL('./src/data', import.meta.url)),
-      '@services': fileURLToPath(new URL('./src/services', import.meta.url))
+      '@services': fileURLToPath(new URL('./src/services', import.meta.url)),
+      '@context': fileURLToPath(new URL('./src/context', import.meta.url))
     },
   },
 })
