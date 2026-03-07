@@ -10,6 +10,7 @@ import Cart from "@cart/Cart.jsx";
 
 import Header from "@home/Header.jsx";
 import Footer from "@home/Footer.jsx";
+import AdminView from "../Frontend/admin/AdminView"
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/profile" element={<Profile />} />
+        <Route path="/menu" element={<Menu />} />
+        <Route path="/register" element ={<Register />}/>
+        <Route path= "/login" element = {<Login />} /> 
+        <Route path= "/admin" element = {<AdminView />} /> 
       </Routes>
 
       <Footer />
