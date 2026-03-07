@@ -24,6 +24,10 @@
   font-size: 20px;
 }
 
+.footer h3, h4 {
+  color: black;
+}
+
 /* MAPA */
 .footer-map iframe {
   width: 100%;
@@ -58,6 +62,7 @@
   display: flex;
   gap: 20px;
   margin-top: 10px;
+  color: black;
 }
 
 .footer-social-icons a {

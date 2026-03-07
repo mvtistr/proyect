@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Icons } from "@shared/icons.js";
+import { BsPersonFill } from "react-icons/bs";
 import "@styles/home.css";
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +32,7 @@ function Login() {
   return (
     <div className=" login-container min-vh-100  d-flex flex-column justify-content-center align-items-center">
         
-        <Icons.User size={60} className="" style={{color:'rgb(255, 135, 50)'}}  />
+        <BsPersonFill size={60} className="" style={{color:'rgb(255, 135, 50)'}}  />
          <h1 className="mt-5" style={{color:'rgb(255, 135, 50)'}} >Inicio de sesion</h1>
         <form action="submit"  onSubmit={entrar} className="formulario ">
             <div className="m-3 form-floating">

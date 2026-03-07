@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Icons } from "@shared/icons";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import products from "@data/products";
 import "@styles/home.css";
 
@@ -32,7 +32,7 @@ function Home() {
       {/* ====== BANNER DESTACADO ====== */}
       <section className="hero-section">
         <button className="arrow left" onClick={prevSlide}>
-          <Icons.ArrowLeft size={28} />
+          <BsArrowLeft size={28} />
         </button>
         <img
           src={featured.image}
@@ -42,7 +42,7 @@ function Home() {
           style={{ cursor: "pointer", "height": "400px", "width": "500px" }}
         />
         <button className="arrow right" onClick={nextSlide}>
-          <Icons.ArrowRight size={28} />
+          <BsArrowRight size={28} />
         </button>
         <div className="hero-content">
           <h2 className="title-font">{featured.name}</h2>

@@ -12,7 +12,7 @@ const products = [
 			"Tomate",
 			"Salsa especial",
 		],
-		image: "https://images.unsplash.com/photo-1610970878459-a0e464d7592b?q=80&w=1224&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		image: "https://images.pexels.com/photos/2271107/pexels-photo-2271107.jpeg",
 		category: "burgers",
 		isFeatured: true,
 		isOffer: false,
@@ -30,7 +30,7 @@ const products = [
 			"Papas fritas",
 			"Bebida",
 		],
-		image: "https://images.unsplash.com/photo-1550317138-10000687a72b?q=80&w=1220&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+		image: "https://images.pexels.com/photos/2089717/pexels-photo-2089717.jpeg",
 		category: "combos",
 		isFeatured: false,
 		isOffer: true,
@@ -48,7 +48,7 @@ const products = [
 			"Papas fritas",
 			"Bebida",
 		],
-		image: "/src/assets/img/doble-queso.jpg",
+		image: "https://images.pexels.com/photos/5908286/pexels-photo-5908286.jpeg",
 		category: "combos",
 		isFeatured: false,
 		isOffer: true,
@@ -61,12 +61,13 @@ const products = [
 		description:
 			"Hamburguesa de pollo crispy con lechuga, tomate y mayonesa casera.",
 		ingredients: ["Pollo crispy", "Lechuga", "Tomate", "Mayonesa"],
-		image: "/src/assets/img/pollo-crispy.jpg",
+		image: "https://images.pexels.com/photos/9975765/pexels-photo-9975765.jpeg",
 		category: "burgers",
 		isFeatured: false,
 		isOffer: true,
 		stock: 18,
 	},
+
 	{
 		id: "5",
 		name: "Combo Familiar Mega",
@@ -74,12 +75,13 @@ const products = [
 		description:
 			"4 hamburguesas clásicas, 2 porciones grandes de papas y 4 bebidas.",
 		ingredients: ["4 hamburguesas", "2 papas grandes", "4 bebidas"],
-		image: "/src/assets/img/combox4.png",
+		image: "https://images.pexels.com/photos/4021939/pexels-photo-4021939.jpeg",
 		category: "combos",
 		isFeatured: false,
 		isOffer: true,
 		stock: 5,
 	},
+
 	{
 		id: "6",
 		name: "Mega Bacon Burger",
@@ -87,24 +89,26 @@ const products = [
 		description:
 			"Hamburguesa con doble carne, tocino crujiente, queso cheddar y salsa BBQ.",
 		ingredients: ["Carne 100% vacuno", "Tocino", "Queso cheddar", "Salsa BBQ"],
-		image: "https://images.unsplash.com/photo-1550547660-d9450f859349",
+		image: "https://images.pexels.com/photos/660282/pexels-photo-660282.jpeg",
 		category: "burgers",
 		isFeatured: false,
 		isOffer: false,
 		stock: 20,
 	},
+
 	{
 		id: "7",
 		name: "Triple Mega Burger",
 		price: 11990,
 		description: "Hamburguesa triple carne con triple queso y salsa especial.",
 		ingredients: ["Triple carne", "Triple queso cheddar", "Salsa especial"],
-		image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+		image: "https://media.istockphoto.com/id/1453739155/es/foto/toma-vertical-de-una-deliciosa-hamburguesa-jugosa-con-triple-hamburguesa-sobre-una-mesa-de.jpg?b=1&s=612x612&w=0&k=20&c=2CYj870Znz_Lqv2zIbrHBArxV6RnKNxdAwAKdirGui4=",
 		category: "burgers",
 		isFeatured: false,
 		isOffer: false,
 		stock: 15,
 	},
+
 	{
 		id: "8",
 		name: "Veggie Burger",
@@ -118,78 +122,85 @@ const products = [
 		isOffer: false,
 		stock: 12,
 	},
+
 	{
 		id: "9",
 		name: "Papas Fritas Clásicas",
 		price: 2990,
 		description: "Papas fritas crujientes recién hechas.",
 		ingredients: ["Papas", "Sal"],
-		image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877",
+		image: "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg",
 		category: "fries",
 		isFeatured: false,
 		isOffer: false,
 		stock: 40,
 	},
+
 	{
 		id: "10",
 		name: "Papas con Cheddar",
 		price: 3990,
 		description: "Papas fritas con abundante queso cheddar.",
 		ingredients: ["Papas fritas", "Queso cheddar"],
-		image: "https://images.unsplash.com/photo-1585109649139-366815a0d713",
+		image: "https://media.istockphoto.com/id/1301802151/es/foto/queso-cheddar-vertido-o-tirado-de-las-papas-fritas-fritas-en-la-parte-superior.jpg?b=1&s=612x612&w=0&k=20&c=iQLUDsbIDa007_hVWA-C2Wogy4YHNAIfLU1_AvqFcqQ=",
 		category: "fries",
 		isFeatured: false,
 		isOffer: false,
 		stock: 30,
 	},
+
 	{
 		id: "11",
 		name: "Papas con Tocino",
 		price: 4490,
 		description: "Papas fritas con cheddar derretido y tocino crujiente.",
 		ingredients: ["Papas fritas", "Queso cheddar", "Tocino"],
-		image: "https://images.unsplash.com/photo-1630431345637-0c58c41c0e6b",
+		image: "https://media.istockphoto.com/id/1303663892/es/foto/patatas-fritas-con-cheddar-y-tocino.jpg?b=1&s=612x612&w=0&k=20&c=ET7skNpkXjhbPOEHoY6eZvXGdGXP69bav0Ao17g3tp4=",
 		category: "fries",
 		isFeatured: false,
 		isOffer: false,
 		stock: 25,
 	},
+
 	{
 		id: "12",
 		name: "Coca Cola 350ml",
 		price: 1990,
 		description: "Bebida Coca Cola clásica 350ml.",
 		ingredients: ["Coca Cola"],
-		image: "https://images.unsplash.com/photo-1629203851122-3726ecdf080e",
+		image: "https://media.istockphoto.com/id/1062831310/es/foto/vierta-el-refresco-en-vaso-con-poco-de-hielo-sobre-fondo-oscuro.jpg?b=1&s=612x612&w=0&k=20&c=h1ntgfXP_ABi2H945DfU8c-di1f1wj12LPrnPPojFTE=",
 		category: "drinks",
 		isFeatured: false,
 		isOffer: false,
 		stock: 50,
 	},
+
 	{
 		id: "13",
 		name: "Sprite 350ml",
 		price: 1990,
 		description: "Bebida Sprite refrescante 350ml.",
 		ingredients: ["Sprite"],
-		image: "https://images.unsplash.com/photo-1581006852262-e4307cf6283a",
+		image: "https://images.unsplash.com/photo-1592860893757-84536a1c9b82?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c3ByaXRlfGVufDB8fDB8fHww",
 		category: "drinks",
 		isFeatured: false,
 		isOffer: false,
 		stock: 50,
 	},
+
 	{
 		id: "14",
 		name: "Fanta 350ml",
 		price: 1990,
 		description: "Bebida sabor naranja.",
 		ingredients: ["Fanta"],
-		image: "https://images.unsplash.com/photo-1581636625402-29b2a704ef13",
+		image: "https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFudGF8ZW58MHx8MHx8fDA%3D",
 		category: "drinks",
 		isFeatured: false,
 		isOffer: false,
 		stock: 50,
 	},
+
 	{
 		id: "15",
 		name: "Milkshake Chocolate",
@@ -202,6 +213,7 @@ const products = [
 		isOffer: false,
 		stock: 20,
 	},
+
 	{
 		id: "16",
 		name: "Onion Rings",
@@ -217,15 +229,3 @@ const products = [
 ];
 
 export default products;
-
-// Tabla en PostgreSQL
-
-// id
-// name
-// price
-// description
-// image
-// category
-// is_featured
-// is_offer
-// stock

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Icons } from "@shared/icons";
+import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
 import { fetchProducts } from "@services/productService";
 import "@styles/menu.css";
 import { Link } from "react-router-dom";
@@ -32,7 +32,7 @@ function Menu() {
       </h2>
       <div className="gallery-wrapper">
         <button className="gallery-arrow" onClick={prev}>
-          <Icons.ArrowLeft size={35} />
+          <BsArrowLeftCircleFill size={35} />
         </button>
         <div className="gallery-grid">
           {visible.map((product) => (
@@ -54,7 +54,7 @@ function Menu() {
           ))}
         </div>
         <button className="gallery-arrow" onClick={next}>
-          <Icons.ArrowRight size={35} />
+          <BsArrowRightCircleFill size={35} />
         </button>
       </div>
     </div>

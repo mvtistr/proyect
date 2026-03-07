@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { Icons } from "@shared/icons";
 import "@styles/footer.css";
+import { Link } from "react-router-dom";
+import { Icons } from "@shared/icons.js";
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-container">
 
-        {/* MAPA */}
+      <div className="footer-container">
+                {/* MAPA */}
         <div className="footer-section footer-map">
           <h3>Encuéntranos</h3>
           <iframe
@@ -27,25 +27,45 @@ function Footer() {
           </ul>
         </div>
 
-        {/* REDES */}
-        <div className="footer-section footer-social">
-          <h3>Síguenos</h3>
-          <div className="footer-social-icons">
-            <a href="#">
-              <Icons.Instagram size={28}/>
+        <div className="footer-social">
+          <h4>Síguenos</h4>
+
+          <div className="social-icons">
+
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Instagram size={38} className="social-icon" style={{color:'black'}} />
             </a>
-            <a href="#">
-              <Icons.Facebook size={28}/>
+
+            <a
+              href="https://tiktok.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Tiktok size={38} className="social-icon" style={{color:'black'}} />
             </a>
-            <a href="#">
-              <Icons.Tiktok size={28}/>
+
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Facebook size={38} className="social-icon" style={{ color: 'black' }} />
             </a>
+
           </div>
+
         </div>
+
       </div>
-      <div className="footer-copy">
-        <p>© 2026 Mega Burguer. Todos los derechos reservados.</p>
-      </div>
+
+      <p className="footer-copy">
+        © {new Date().getFullYear()} Mega Burguer - Todos los derechos reservados
+      </p>
+
     </footer>
   );
 }

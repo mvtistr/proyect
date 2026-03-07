@@ -1,78 +1,56 @@
 .logo{
-    height: 100px;
-    width: 100px;
+    height: 80px;
+    width: auto;
 }
 
+/* NAVBAR */
+
 .nav-bar{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px;
+    padding: 15px 30px;
     background-color: var(--tertiary);
 }
 
-.icons:hover {
-    color: white;
-    cursor: pointer;
-}
+/* IZQUIERDA */
 
-h1:hover {
-    color: white;
-    cursor: pointer;
-}
-
-.icons-header{
+.nav-left{
     display: flex;
     align-items: center;
-    gap: 20px;
 }
 
-.tooltip{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
+/* CENTRO */
+
+.nav-center{
+    display: flex;
+    justify-content: center;
 }
 
-/* TEXTO TOOLTIP */
-.tooltip-text{
-  position: absolute;
-  /*texto debajo del icono*/
-  bottom: -38px; 
-  left: 50%;
-  transform: translateX(-50%) translateY(5px);
-    /*texto a la izquierda del icono*/
-  /* left: -65px;
-  top: 50%;
-  transform: translateY(-50%); */
-  background: rgba(0,0,0,0.85);
+.header-title{
+    font-size: 40px;
+    color: black;
+}
+
+/* DERECHA */
+
+.nav-right{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+}
+
+.icons{
+  color: black;
+}
+
+.icons:hover{
   color: white;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.25s ease;
+  cursor: pointer;
 }
 
-/* TRIÁNGULO */
-.tooltip-text::after{
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent rgba(0,0,0,0.85) transparent;
-}
-
-/* HOVER */
-.tooltip:hover .tooltip-text{
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+/* CART BADGE */
 
 .cart-icon{
   position: relative;
@@ -87,4 +65,21 @@ h1:hover {
   font-size: 12px;
   padding: 2px 6px;
   border-radius: 50%;
+}
+
+.icons-header svg{
+  color: black;
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.icons-header svg:hover{
+  color: white;
+}
+
+.icons-header{
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
