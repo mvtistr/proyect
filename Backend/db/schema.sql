@@ -1,10 +1,9 @@
--- Creacion de la base de datos
-CREATE DATABASE megaburguer;
+DROP TABLE IF EXISTS details CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS category CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
 
--- Conectarse
-\c megaburguer;
-
--- Tablas
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -33,13 +32,6 @@ CREATE TABLE users (
     role VARCHAR(20) DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE details (
-    id SERIAL PRIMARY KEY,
-    order_id INTEGER REFERENCES orders(id),
-    product_id INTEGER REFERENCES products(id),
-    quantity INTEGER NOT NULL,
-    price INTEGER NOT NULL
-);
 
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
@@ -49,7 +41,14 @@ CREATE TABLE orders (
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insertar productos de ejemplo
+CREATE TABLE details (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES products(id),
+    quantity INTEGER NOT NULL,
+    price INTEGER NOT NULL
+);
+
 INSERT INTO products (name, ingredients, price, image_url, category, is_featured, is_offer, stock)
 VALUES
 ('Mega Burguer Clasica', 'Pan brioche tostado, doble carne 100% vacuno, queso cheddar derretido, lechuga fresca, tomate y salsa especial Mega.', 9990, 'https://images.pexels.com/photos/2271107/pexels-photo-2271107.jpeg', 'Burguers', true, false, 20),
