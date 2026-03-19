@@ -1,74 +1,60 @@
-const express = require('express');
+const pool = require('../../db/db.js');
 const bcrypt = require('bcryptjs')
-const pool = require('../../db/db');
 
-
-
-
-
-
-const registerModule = async (name, email, password, direction, role = 'user') =>{
-    const passwordSegura =bcrypt.hashSync(password,10)
-    password = passwordSegura
-    const values = [name, email, passwordSegura, direction, role]
-    const consulta = `insert into users (name, email, password, direction, role) values ($1,$2,$3,$4, $5) returning *`
-    const result = await pool.query(consulta, values)
-    const usuarioRegistrado = result.rows[0]
-    return usuarioRegistrado
-
-}
-
-
-const deleteUserModule = async (id )=>{
-    const consulta =  `delete FROM users where id = $1`
-    const values = [id]
-    const result = await pool.query(consulta,values)
-    return result.rowCount
-    
-
-}
-
-
-const actualizarUserModule = async(id, name, password, direction)=>{
-    const passwordSegura = bcrypt.hashSync(password, 10);
-    const values = [ name, passwordSegura,direction, id]
-
-    const consulta = `update users set name =$1, password = $2, direction =$3 where id= $4 returning *`
-    const result = await pool.query(consulta, values)
-    return result.rowCount
-
-}
-
-
-
-
-
-const loginModule = async (email, password) =>{
-    const values = [email]
-    const consulta = `select * from users where email=$1`
-    const result = await pool.query(consulta, values )
-    const usuario = result.rows[0]
-    const rowCount = result.rowCount
-
-
-    if (rowCount===0){
-        throw {code:401, message :"email no encontrado"};
+const registerModule = async (name, email, password, direction, role = 'user') => {
+    const existing = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (existing.rows.length > 0) {
+        throw new Error('El usuario ya existe');
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const res = await pool.query(
+        `INSERT INTO users (name, email, password, direction, role)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING id, name, email, direction, role`,
+        [name, email, hashedPassword, direction, role]
+    );
+    return res.rows[0];
+};
 
-    const { password:passwordSegura}= usuario
-    const passwordCorrecta = bcrypt.compareSync(password, passwordSegura)
+const loginModule = async (email, password) => {
+    const res = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (res.rows.length === 0) return null;
+    const user = res.rows[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return null;
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+    };
+};
 
-    if(!passwordCorrecta) {
-        throw {code: 401, message: "Datos incorrectos"}
+const updateUserModule = async (id, name, email, password, direction) => {
+    let hashedPassword = null;
+    if (password) {
+        hashedPassword = await bcrypt.hash(password, 10);
     }
+    const res = await pool.query(
+        `UPDATE users
+        SET name = $1,
+            password = COALESCE($2, password),
+            direction = $3
+        WHERE id = $4
+        RETURNING id, name, email, direction, role`,
+        [name, hashedPassword, direction, id]
+    );
+    return res.rows[0];
+};
 
-    const token = jwt.sign({email}, process.env.JWT_SECRET, {expiresIn:'1h'})
-    return token;
+const deleteUserModule = async (id) => {
+    const res = await pool.query('DELETE FROM users WHERE id = $1 RETURNING id', [id]);
+    return res.rows[0];
+};
 
-
-
-}
-
-
-
-module.exports = {loginModule , deleteUserModule, registerModule , actualizarUserModule} 
+module.exports = {
+    registerModule,
+    loginModule,
+    updateUserModule,
+    deleteUserModule
+};
