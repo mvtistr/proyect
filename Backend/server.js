@@ -9,5 +9,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(json());
 app.use("/api", routes);
+app.get("/", (req, res) => {
+    res.json({
+        status: "OK",
+        message: "MegaBurger API running"
+    });
+});
 
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
