@@ -8,29 +8,39 @@ const {
 } = require('../models/auth.model.js');
 
 // LOGIN
-const loginController = async(req, res) =>{
-    try{
-        const {email, password}= req.body;
-        const user = await loginModule(email, password);
-        if(!user){
-            return res.status(401).json({error:"Credenciales invalidas"})
-        }
-        const token = jwt.sign(
-            user,
-            process.env.JWT_SECRET,
-            {expiresIn: '2h'}
-        );
-        res.status(200).json({
-            message: "Login exitoso",
-            token,
-            user
-        });
-    }catch(error){
-        res.status(500).json({error:error.message})
+
+const loginController = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email y password son requeridos" });
     }
+
+    const user = await loginModule(email, password);
+
+    if (!user) {
+      return res.status(401).json({ error: "Credenciales invalidas" });
+    }
+
+    const token = jwt.sign(
+      user,
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
+    );
+
+    res.status(200).json({
+      message: "Login exitoso",
+      token,
+      user
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 // REGISTER
+
 const registerController = async (req,res)=>{
     try {
         const {name,email, password, direction} = req.body;
