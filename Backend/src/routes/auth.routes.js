@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
+const verifyToken = require('../middleware/auth.middleware.js');
+
 const {
-    loginController,
-    registerController,
-    deleteUserController,
-    updateUserController
+  loginController,
+  registerController,
+  deleteUserController,
+  updateUserController
 } = require('../controllers/auth.controller.js');
 
-// AUTH
 router.post('/register', registerController);
 router.post('/login', loginController);
 
-// USER
-router.put('/user/:id', updateUserController);
-router.delete('/user/:id', deleteUserController);
+router.put('/user/:id', verifyToken, updateUserController);
+router.delete('/user/:id', verifyToken, deleteUserController);
 
 module.exports = router;
