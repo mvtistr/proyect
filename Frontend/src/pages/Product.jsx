@@ -23,11 +23,9 @@ function Product() {
       }
     };
 
-    loadProduct();
+    if(id) loadProduct();
   }, [id]);
-  if (!product) {
-    return <h2>Cargando producto...</h2>;
-  }
+  if(!product) return <h2>Cargando producto...</h2>;
 
   const handleAddToCart = () => {
     addToCart(product);
