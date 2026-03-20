@@ -53,8 +53,11 @@ const updateProduct = async (id, product) => {
 };
 
 const deleteProduct = async (id) => {
-    const result = await pool.query('DELETE FROM products WHERE id = $1', [id]);
-    return result.rows[0];
+  const result = await pool.query(
+    'DELETE FROM products WHERE id = $1 RETURNING *',
+    [id]
+  );
+  return result.rows[0];
 };
 
 module.exports = {
