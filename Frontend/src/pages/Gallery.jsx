@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Icons } from "@shared/icons.js";
-
 import { getProducts } from "@services/product.service.js";
 
 import "@styles/menu.css";
 
-function Menu() {
+function Gallery() {
   const [products, setProducts] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
   const visibleProducts = 4;
@@ -21,6 +20,7 @@ function Menu() {
         console.error("Error cargando los productos:", error);
       }
     };
+
     loadProducts();
   }, []);
 
@@ -44,13 +44,13 @@ function Menu() {
 
   return (
     <div className="gallery-container">
-      <h2 className="title-font gallery-title">
-        Nuestro Menú
-      </h2>
+      <h2 className="title-font gallery-title">Nuestro Menú</h2>
+
       <div className="gallery-wrapper">
         <button className="gallery-arrow" onClick={prev}>
           <Icons.ArrowLeft size={35} />
         </button>
+
         <div className="gallery-grid">
           {visible.map((product) => (
             <Link
@@ -65,11 +65,12 @@ function Menu() {
               />
               <h3>{product.name}</h3>
               <p className="product-price">
-                ${product.price}
+                ${Number(product.price).toLocaleString("es-CL")}
               </p>
             </Link>
           ))}
         </div>
+
         <button className="gallery-arrow" onClick={next}>
           <Icons.ArrowRight size={35} />
         </button>
@@ -78,4 +79,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default Gallery;

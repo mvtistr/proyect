@@ -1,70 +1,82 @@
-import API from "./api";
+import api from "./api";
 
 export const getOrders = async () => {
-    const token = localStorage.getItem("token");
-    const res = await API.get('/orders', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.get("/orders");
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const getOrderById = async (id) => {
-    const token = localStorage.getItem("token");
-    const res = await API.get(`/orders/${id}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.get(`/orders/${id}`);
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const createOrder = async (orderData) => {
-    const token = localStorage.getItem("token");
-    const res = await API.post('/orders', orderData, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.post("/orders", orderData);
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const updateOrder = async (id, orderData) => {
-    const token = localStorage.getItem("token");
-    const res = await API.put(`/orders/${id}`, orderData, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.put(`/orders/${id}`, orderData);
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const deleteOrder = async (id) => {
-    const token = localStorage.getItem("token");
-    const res = await API.delete(`/orders/${id}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.delete(`/orders/${id}`);
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const getOrderDetails = async (id) => {
-    const token = localStorage.getItem("token");
-    const res = await API.get(`/orders/${id}/details`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
+  try {
+    const res = await api.get(`/orders/${id}/details`);
     return res.data;
+  } catch (error) {
+    if (error.response) {
+      throw new Error(error.response.data?.message || "API_ERROR");
+    }
+    throw new Error("NETWORK_ERROR");
+  }
 };
 
 export const orderService = {
-    getOrders,
-    getOrderById,
-    createOrder,
-    updateOrder,
-    deleteOrder,
-    getOrderDetails
+  getOrders,
+  getOrderById,
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  getOrderDetails,
 };

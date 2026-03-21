@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { CartContext } from "@context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 import { createOrder } from "@services/order.service";
 
@@ -13,26 +14,41 @@ function Cart() {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
-    clearCart
+    clearCart,
   } = useContext(CartContext);
+
+  const { user } = useAuth();
   const navigate = useNavigate();
+
   const total = cart.reduce(
-    (acc, product) => acc + product.price * product.quantity,
+    (acc, product) => acc + Number(product.price) * product.quantity,
     0
   );
 
   const handleCheckout = async () => {
+    if (!user) {
+      alert("Debes iniciar sesión para finalizar la compra");
+      navigate("/login");
+      return;
+    }
+
     try {
       const order = {
-        user_id: 1, // Reemplazar con el ID del usuario autenticado
+        user_id: user.id,
         total_price: total,
-        cart: cart,
+        cart: cart.map((product) => ({
+          product_id: product.id,
+          quantity: product.quantity,
+          price: Number(product.price),
+        })),
       };
+
       await createOrder(order);
       clearCart();
       alert("Pedido realizado con éxito");
+      navigate("/profile");
     } catch (error) {
-      console.error(error);
+      console.error("Error al procesar pedido:", error);
       alert("Error al procesar pedido");
     }
   };
@@ -50,14 +66,11 @@ function Cart() {
 
   return (
     <div className="cart-container">
-
       <h2 className="title-font cart-title">Tu Pedido</h2>
 
       <div className="cart-items">
-
         {cart.map((product) => (
           <div key={product.id} className="cart-item">
-
             <img
               src={product.image_url}
               alt={product.name}
@@ -66,14 +79,13 @@ function Cart() {
 
             <div className="cart-item-info">
               <h3>{product.name}</h3>
-              <p>${product.price.toLocaleString("es-CL")}</p>
+              <p>${Number(product.price).toLocaleString("es-CL")}</p>
 
               <div className="quantity-controls">
                 <button onClick={() => decreaseQuantity(product.id)}>-</button>
                 <span>{product.quantity}</span>
                 <button onClick={() => increaseQuantity(product.id)}>+</button>
               </div>
-
             </div>
 
             <button
@@ -82,42 +94,27 @@ function Cart() {
             >
               Eliminar
             </button>
-
           </div>
         ))}
-
       </div>
 
       <div className="cart-summary">
-
-        <h3>
-          Total: ${total.toLocaleString("es-CL")}
-        </h3>
+        <h3>Total: ${total.toLocaleString("es-CL")}</h3>
 
         <div className="cart-buttons">
+          <button className="cart-btn checkout" onClick={handleCheckout}>
+            Finalizar compra
+          </button>
 
-        <button className="cart-btn checkout" onClick={handleCheckout}>
-          Finalizar compra
-        </button>
-
-          <button
-            className="cart-btn"
-            onClick={() => navigate("/menu")}
-          >
+          <button className="cart-btn" onClick={() => navigate("/menu")}>
             Seguir comprando
           </button>
 
-          <button
-            className="cart-btn clear"
-            onClick={clearCart}
-          >
+          <button className="cart-btn clear" onClick={clearCart}>
             Vaciar pedido
           </button>
-
         </div>
-
       </div>
-
     </div>
   );
 }
