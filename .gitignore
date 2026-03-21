@@ -6,3 +6,5 @@ Frontend/dist/
 Backend/dist/
 .vite/
 .env
+Backend/.env
+Frontend/.env
