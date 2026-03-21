@@ -24,7 +24,6 @@ function App() {
         <Route path="/menu" element={<Gallery />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
-
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
@@ -36,9 +35,16 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/admin" element={<AdminView />} />
 
-        {/* ruta 404 */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminView />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<h1>404 Not Found</h1>} />
       </Routes>
 
