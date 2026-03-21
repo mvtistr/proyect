@@ -3,10 +3,16 @@ import "@styles/header.css";
 
 import { Link } from "react-router-dom";
 import { Icons } from "@shared/icons";
+import { useAuth } from "@context/AuthContext";
 
 import Logo from "@img/Logo-removebg.png";
 
 function Header() {
+    const { user } = useAuth(); 
+
+
+
+
     return (
         <header className="header">
             <nav className="nav-bar">
@@ -22,6 +28,12 @@ function Header() {
               </div>
 
                 <div className="icons-header">
+
+                       {user?.role === "admin" && (
+                        <Link to="/admin">
+                            <Icons.Admin size={50} className="icons" />
+                        </Link>
+                    )}
                     <Link to="/profile">
                         <Icons.User size={50} className="icons" />
                     </Link>
