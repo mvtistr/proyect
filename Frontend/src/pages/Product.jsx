@@ -9,6 +9,7 @@ import { useAuth } from "@context/AuthContext";
 import { getProductById, updateProduct, deleteProduct } from "@services/product.service";
 
 import "@styles/product.css";
+import "@styles/global.css";
 
 import { Icons } from "@shared/icons.js";
 
@@ -268,7 +269,7 @@ function Product() {
                       onClick={handleEdit}
                       title="Editar"
                       style={{
-                        background: "#ffc107",
+                        background: "var(--tertiary)",
                         border: "none",
                         borderRadius: "4px",
                         padding: "5px 8px",
@@ -285,7 +286,7 @@ function Product() {
                       onClick={handleDelete}
                       title="Eliminar"
                       style={{
-                        background: "#dc3545",
+                        background: "var(--secondary)",
                         border: "none",
                         borderRadius: "4px",
                         padding: "5px 8px",
@@ -316,7 +317,7 @@ function Product() {
                     <button
                     onClick={handleCancel}
                     style={{
-                      background: "#6c757d",
+                      background: "var(--primary)",
                       color: "white",
                       border: "none",
                       borderRadius: "6px",
