@@ -43,7 +43,7 @@ const loginController = async (req, res) => {
 
 const registerController = async (req,res)=>{
     try {
-        const {name,email, password, direction} = req.body;
+        const {name,email, password, direction, role} = req.body;
         if(!name || !email || !password || !direction){
             return res.status(400).json({error:"Todos los campos son requeridos"});
         }
@@ -52,6 +52,7 @@ const registerController = async (req,res)=>{
             email,
             password,
             direction,
+            role || 'user'
         );
         res.status(201).json({
             message: "Usuario registrado exitosamente",

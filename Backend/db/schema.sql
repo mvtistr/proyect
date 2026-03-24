@@ -69,3 +69,8 @@ VALUES
 ('Fanta 350ml', 'Bebida sabor naranja.', 'Refresco dulce sabor naranja.', 1990, 'https://images.unsplash.com/photo-1624517452488-04869289c4ca?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFudGF8ZW58MHx8MHx8fDA%3D', 'Drinks', false, false, 50),
 ('Milkshake Chocolate', 'Milkshake cremoso de chocolate.', 'Batido espeso con sabor intenso a chocolate.', 3490, 'https://images.unsplash.com/photo-1572490122747-3968b75cc699', 'Drinks', false, false, 20),
 ('Onion Rings', 'Aros de cebolla crujientes con salsa especial.', 'Aros crocantes ideales para compartir.', 3490, 'https://images.unsplash.com/photo-1639024471283-03518883512d', 'Fries', false, false, 25);
+
+INSERT INTO users 
+(name, email, password, direction, role)
+VALUES
+('Carlos Ramirez', 'admin1@megaburguer.cl', '$2b$10$hnwN9xhE8rqWMZSDFwKeceMibyR.JVWGxm1KB.hDtgQqFVkGw6fFW', 'Av. Siempre Viva 742, Santiago', 'admin');
