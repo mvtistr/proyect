@@ -55,6 +55,9 @@ const updateProduct = async (id, product) => {
             index++;
         }
     }
+    if(fields.length === 0){
+        throw new Error("No hay campos validos para actualizar");
+    }
     values.push(id);
     const query = `
         UPDATE products SET ${fields.join(", ")}
