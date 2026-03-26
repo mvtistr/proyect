@@ -60,7 +60,10 @@ const updateProductController = async (req, res) => {
     return res.status(200).json(product);
   } catch (error) {
     console.log("ERROR BACKEND:", error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(400).json({
+      error: error.message || "Error desconocido",
+      detail: error.detail || null
+    });
   }
 };
 
