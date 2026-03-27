@@ -33,7 +33,7 @@ const createProduct = async (product) => {
 };
 
 const updateProduct = async (id, product) => {
-    console.log("MODEL DATA:", product);
+    console.log("QUERY DATA:", product);
     const allowedFields = [
         "name",
         "ingredients",
@@ -79,9 +79,9 @@ const deleteProduct = async (id) => {
     return res.rows[0];
 };
 
-const countFeaturedProducts = async () => {
+const countOfferProducts = async () => {
     const res = await pool.query(
-        'SELECT COUNT(*) FROM products WHERE is_featured = true'
+        'SELECT COUNT(*) FROM products WHERE is_offer = true'
     );
     return parseInt(res.rows[0].count);
 };
@@ -92,5 +92,5 @@ module.exports = {
     createProduct,
     updateProduct,
     deleteProduct,
-    countFeaturedProducts
+    countOfferProducts
 };
