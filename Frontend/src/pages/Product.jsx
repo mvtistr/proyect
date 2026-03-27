@@ -67,7 +67,7 @@ function Product() {
       await updatedProduct(id, cleanProduct);
       toast.success("Destacado actualizado");
     }catch(error){
-      console.error(error);
+      //console.error(error);
       toast.error("Error al actualizar destacado");
     }
   };
