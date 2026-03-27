@@ -33,7 +33,7 @@ const createProduct = async (product) => {
 };
 
 const updateProduct = async (id, product) => {
-    console.log("MODEL DATA:", product);
+    console.log("QUERY DATA:", product);
     const allowedFields = [
         "name",
         "ingredients",
