@@ -61,6 +61,6 @@ export const updateProduct = async (id, data) => {
         return res.data;
     } catch (error) {
         handleError(error);
-        throw error;
+        return null;
     }
 };
