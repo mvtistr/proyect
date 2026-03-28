@@ -105,10 +105,7 @@ const updateUserController = async (req, res) => {
             password: hashedPassword,
             direction
         });
-        return res.status(200).json({
-            message: "Usuario actualizado exitosamente",
-            user: updatedUser,
-        });
+        return res.status(200).json(updatedUser);
     } catch (error) {
         console.error("UPDATE ERROR:", error);
         return res.status(500).json({ error: "Error actualizando usuario" });

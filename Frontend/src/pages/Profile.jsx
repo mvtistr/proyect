@@ -13,10 +13,11 @@ import "@styles/register_login.css";
 
 function Profile() {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout, setUser } = useAuth();
 
   const [editing, setEditing] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -49,21 +50,36 @@ function Profile() {
 
   const handleSave = async () => {
     try {
-      await api.put(`/user/${user.id}`, form);
+      setSaving(true);
+      const cleanData = { ...form };
+      if(!cleanData.password){
+        delete cleanData.password;
+      }
+      const res = await api.put(`/user/${user.id}`, cleanData);
+      const updatedUser = res.data;
+      setForm({
+        name: updatedUser.name,
+        email: updatedUser.email,
+        direction: updatedUser.direction
+      });
+      setUser(updatedUser);
       toast.success("Perfil actualizado");
       setEditing(false);
     } catch (error) {
       toast.error("Error al actualizar");
+    }finally{
+      setSaving(false);
     }
   };
 
   const handleCancel = () => {
     setEditing(false);
-    setForm({
-      name: user.name,
-      email: user.email,
-      direction: user.direction
-    });
+    setForm(prev => ({
+      ...prev,
+      name: user.name || "",
+      email: user.email || "",
+      direction: user.direction || ""
+    }));
   };
 
   const handleDelete = async () => {
@@ -118,7 +134,7 @@ function Profile() {
                 borderColor: "rgb(255, 135, 50)",
                 color: "white",
               }}
-              onClick={() => setEditing(true)}
+              onClick={() => setEditing(prev => !prev)}
             >
               Editar
             </button>
@@ -144,6 +160,7 @@ function Profile() {
                 <input
                   className="form-control"
                   type="text"
+                  id="name"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
@@ -154,6 +171,7 @@ function Profile() {
                 <input
                   className="form-control"
                   type="email"
+                  id="email"
                   name="email"
                   value={form.email}
                   disabled
@@ -165,6 +183,7 @@ function Profile() {
                   className="form-control"
                   type="text"
                   name="direction"
+                  id="direction"
                   value={form.direction}
                   onChange={handleChange}
                 />
@@ -174,6 +193,7 @@ function Profile() {
                 <input
                   className="form-control"
                   type="password"
+                  id="password"
                   name="password"
                   placeholder="Nueva contraseña"
                   onChange={handleChange}
@@ -181,8 +201,8 @@ function Profile() {
                 <label>Nueva contraseña</label>
               </div>
               <div className="d-flex gap-2 m-3">
-                <button className="btn btn-success" onClick={handleSave}>
-                  Guardar
+                <button className="btn btn-success" onClick={handleSave} disabled={saving}>
+                  {saving ? "Guardando..." : "Guardar"}
                 </button>
                 <button className="btn btn-secondary" onClick={handleCancel}>
                   Cancelar
@@ -200,7 +220,7 @@ function Profile() {
           ) : (
             <>
               <div className="m-3">
-                <p><strong>Nombre</strong> {form.name}</p>
+                <p><strong>Nombre:</strong> {form.name}</p>
               </div>
               <div className="m-3">
                 <p><strong>Email</strong> {form.email}</p>

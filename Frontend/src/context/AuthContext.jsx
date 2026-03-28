@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const { setCart } = useContext(CartContext); 
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -15,6 +16,14 @@ export const AuthProvider = ({ children }) => {
     }
     setLoading(false);
   }, []);
+
+  useEffect(() => {
+    if(user){
+      localStorage.setItem("user", JSON.stringify(user));
+    }else{
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   const login = (userData, token) => {
     localStorage.setItem("user", JSON.stringify(userData));
@@ -36,6 +45,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={{
       user,
+      setUser,
       login,
       logout,
       isAuthenticated: !!user,
