@@ -15,12 +15,17 @@ const getFormFromUser = (userData) => ({
   name: userData?.name || "",
   email: userData?.email || "",
   direction: userData?.direction || "",
-  password: ""
+  newPassword: ""
 });
 
 function Profile() {
   const navigate = useNavigate();
   const { user, logout, setUser } = useAuth();
+  const userId = user?.id;
+  const userName = user?.name || "";
+  const userEmail = user?.email || "";
+  const userDirection = user?.direction || "";
+  const userRole = user?.role;
 
   const [editing, setEditing] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -34,6 +39,46 @@ function Profile() {
     }
     setForm(getFormFromUser(user));
   }, [user, navigate]);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    let isMounted = true;
+
+    const syncProfile = async () => {
+      try {
+        const res = await api.get("/auth/profile");
+        const currentUser = {
+          id: res.data?.id ?? userId,
+          name: res.data?.name ?? userName,
+          email: res.data?.email ?? userEmail,
+          direction: res.data?.direction ?? userDirection,
+          role: res.data?.role ?? userRole
+        };
+
+        if (!isMounted) return;
+
+        setUser(currentUser);
+        setForm(getFormFromUser(currentUser));
+      } catch {
+        if (!isMounted) return;
+
+        setForm(getFormFromUser({
+          id: userId,
+          name: userName,
+          email: userEmail,
+          direction: userDirection,
+          role: userRole
+        }));
+      }
+    };
+
+    syncProfile();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [setUser, userDirection, userEmail, userId, userName, userRole]);
 
   const handleLogout = () => {
     logout();
@@ -59,12 +104,25 @@ function Profile() {
   const handleSave = async () => {
     try {
       setSaving(true);
-      const cleanData = { ...form };
-      if (!cleanData.password) {
-        delete cleanData.password;
+      const cleanData = {
+        name: form.name.trim(),
+        direction: form.direction.trim()
+      };
+      const nextPassword = form.newPassword.trim();
+
+      if (nextPassword) {
+        cleanData.password = nextPassword;
       }
+
       const res = await api.put(`/auth/user/${user.id}`, cleanData);
-      const updatedUser = res.data;
+      const updatedUser = {
+        id: res.data?.id ?? user?.id,
+        name: res.data?.name ?? cleanData.name,
+        email: res.data?.email ?? user?.email ?? form.email,
+        direction: res.data?.direction ?? cleanData.direction,
+        role: res.data?.role ?? user?.role
+      };
+
       setForm(getFormFromUser(updatedUser));
       setUser(updatedUser);
       toast.success("Perfil actualizado");
@@ -196,9 +254,10 @@ function Profile() {
                 <input
                   className="form-control"
                   type="password"
-                  id="password"
-                  name="password"
-                  value={form.password}
+                  id="newPassword"
+                  name="newPassword"
+                  value={form.newPassword}
+                  autoComplete="new-password"
                   placeholder="Nueva contraseña"
                   onChange={handleChange}
                 />

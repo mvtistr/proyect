@@ -23,7 +23,7 @@ const validateRegister = (req, res, next) => {
     next();
 };
 
-const validateLogin = (user) => {
+const validateLogin = (req, res, next) => {
     const { email, password } = req.body;
     if(!email || !email.includes("@")){
         return res.status(400).json({
