@@ -6,6 +6,7 @@ const verifyToken = require('../middleware/auth.middleware.js');
 const {
   loginController,
   registerController,
+  getProfile,
   deleteUserController,
   updateUserController
 } = require('../controllers/auth.controller.js');
@@ -15,6 +16,7 @@ const { validateLogin, validateRegister, validateUpdateUser } = require('../vali
 router.post('/register', validateRegister, registerController);
 router.post('/login', validateLogin, loginController);
 
+router.get('/profile', verifyToken, getProfile);
 router.put('/user/:id', verifyToken, validateUpdateUser, updateUserController);
 router.delete('/user/:id', verifyToken, deleteUserController);
 
